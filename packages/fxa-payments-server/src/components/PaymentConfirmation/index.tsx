@@ -25,7 +25,8 @@ export const PaymentConfirmation = ({
 }: PaymentConfirmationProps) => {
   const { amount, currency, interval, interval_count } = selectedPlan;
   const { displayName, email } = profile;
-  const { brand, last4, subscriptions } = customer;
+
+  const { brand, last4, payment_type, subscriptions } = customer; // payment_type as placeholder pending future property (FXA-2812)
   const invoiceNumber = subscriptions[0].latest_invoice;
   const date = new Date().toLocaleDateString(navigator.language, {
     year: 'numeric',
@@ -103,10 +104,15 @@ export const PaymentConfirmation = ({
           >
             <p>{planPrice}</p>
           </Localized>
-          {last4 && brand && (
+          {last4 && brand && payment_type === 'credit' && (
             <Localized id="payment-confirmation-cc-preview" vars={{ last4 }}>
               <p className={`c-card ${brand.toLowerCase()}`}></p>
             </Localized>
+          )}
+          {payment_type === 'paypal' && ( // placeholder until Customer has a property denoting PayPal payments
+            <span className={`payment-logo ${payment_type}`}>
+              {payment_type}
+            </span>
           )}
         </div>
       </div>
