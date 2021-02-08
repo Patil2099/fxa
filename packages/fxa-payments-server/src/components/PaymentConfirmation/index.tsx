@@ -57,7 +57,11 @@ export const PaymentConfirmation = ({
       data-testid="payment-confirmation"
     >
       <header>
-        <img src={circledCheckbox} alt="circled checkbox" />
+        <img
+          className="circled-check"
+          src={circledCheckbox}
+          alt="circled checkbox"
+        />
         {heading}
         <Localized id="payment-confirmation-subheading">
           <p></p>
