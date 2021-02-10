@@ -50,7 +50,8 @@ const customer: Customer = {
 
 const paypalCustomer: Customer = {
   billing_name: 'Calamity Jane <3s PayPal',
-  payment_type: 'paypal',
+  payment_type: 'credit',
+  // needs payment_provider: "paypal",
   last4: '',
   exp_month: '',
   exp_year: '',
