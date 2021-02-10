@@ -185,8 +185,10 @@ export const SubscriptionCreate = ({
               <PaypalButton
                 apiClientOverrides={apiClientOverrides}
                 customer={customer}
-                setPaymentError={setPaymentError}
                 idempotencyKey={submitNonce}
+                priceId={selectedPlan.plan_id}
+                refreshSubscriptions={refreshSubscriptions}
+                setPaymentError={setPaymentError}
                 ButtonBase={paypalButtonBase}
               />
             </Suspense>

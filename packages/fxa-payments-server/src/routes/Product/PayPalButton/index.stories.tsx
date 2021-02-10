@@ -1,28 +1,40 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { PaypalButton, PaypalButtonProps } from './index';
 
+import { storiesOf } from '@storybook/react';
+import { linkTo } from '@storybook/addon-links';
+import { CUSTOMER, PLAN } from '../../../lib/mock-data';
 import { PickPartial } from '../../../lib/types';
 
+const defaultApiClientOverrides = {
+  apiCreateCustomer: async () => CUSTOMER,
+};
+
 const Subject = ({
-  customer = null,
-  setPaymentError = () => {},
+  apiClientOverrides = defaultApiClientOverrides,
+  customer = CUSTOMER,
   idempotencyKey = '',
+  priceId = PLAN.plan_id,
+  refreshSubscriptions = linkTo('routes/Product', 'success'),
+  setPaymentError = () => {},
   ...props
 }: PickPartial<
   PaypalButtonProps,
-  | 'apiClientOverrides'
   | 'customer'
-  | 'setPaymentError'
   | 'idempotencyKey'
-  | 'ButtonBase'
+  | 'priceId'
+  | 'refreshSubscriptions'
+  | 'setPaymentError'
 >) => {
   return (
     <PaypalButton
       {...{
+        apiClientOverrides,
         customer,
-        setPaymentError,
         idempotencyKey,
+        priceId,
+        refreshSubscriptions,
+        setPaymentError,
         ...props,
       }}
     />
@@ -30,5 +42,5 @@ const Subject = ({
 };
 
 storiesOf('routes/Product/PaypalButton', module).add('default', () => (
-  <Subject></Subject>
+  <Subject />
 ));
