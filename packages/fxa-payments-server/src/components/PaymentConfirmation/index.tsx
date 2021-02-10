@@ -87,15 +87,17 @@ export const PaymentConfirmation = ({
         </div>
       </div>
 
-      <div className="billing-info">
-        <Localized id="payment-confirmation-billing-heading">
-          <h3></h3>
-        </Localized>
-        <div className="bottom-row">
-          {displayName ? <p>{displayName}</p> : null}
-          <p>{email}</p>
+      {!isPaypalPayment && (
+        <div className="billing-info">
+          <Localized id="payment-confirmation-billing-heading">
+            <h3></h3>
+          </Localized>
+          <div className="bottom-row">
+            {displayName ? <p>{displayName}</p> : null}
+            <p>{email}</p>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="payment-details">
         <Localized id="payment-confirmation-details-heading">
