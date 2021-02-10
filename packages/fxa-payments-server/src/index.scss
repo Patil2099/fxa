@@ -249,6 +249,10 @@ hr {
   background-repeat: no-repeat;
 }
 
+.update-payment::before {
+  background-position: top left;
+}
+
 .paypal::before {
   background-image: url('./images/paypal.svg');
 }

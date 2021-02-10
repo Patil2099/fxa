@@ -103,7 +103,11 @@ export const PaymentUpdateForm = ({
 
   const onFormEngaged = useCallback(() => Amplitude.updatePaymentEngaged(), []);
 
-  const { last4, exp_month, exp_year } = customer;
+  const { last4, exp_month, exp_year } = customer; // add payment_provider once it's added to Customer object
+
+  const payment_provider = 'paypal'; // placeholder
+
+  const isPaypalPayment = payment_provider === 'paypal'; //placeholder
 
   // https://github.com/iamkun/dayjs/issues/639
   const expirationDate = dayjs()
@@ -132,7 +136,7 @@ export const PaymentUpdateForm = ({
         {!updateRevealed ? (
           <div className="with-settings-button">
             <div className="card-details">
-              {last4 && expirationDate && (
+              {last4 && expirationDate && !isPaypalPayment && (
                 <>
                   {/* TODO: Need to find a way to display a card icon here? */}
                   <Localized id="sub-update-card-ending" vars={{ last: last4 }}>
@@ -144,6 +148,14 @@ export const PaymentUpdateForm = ({
                     </div>
                   </Localized>
                 </>
+              )}
+
+              {isPaypalPayment && (
+                <span
+                  className={`update-payment payment-logo ${payment_provider}`}
+                >
+                  {payment_provider}
+                </span>
               )}
             </div>
             <div className="action">
