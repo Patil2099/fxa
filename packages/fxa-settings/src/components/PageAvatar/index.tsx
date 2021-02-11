@@ -24,12 +24,13 @@ import FlowContainer from '../FlowContainer';
 import {
   AddPhotoBtn,
   ConfirmBtns,
-  RemovePhotoBtn,
   RotateBtn,
   TakePhotoBtn,
   ZoomInBtn,
   ZoomOutBtn,
 } from './buttons';
+
+import { RemovePhotoBtn } from './removeBtn';
 
 export const UPDATE_AVATAR_MUTATION = gql`
   mutation updateAvatar($file: Upload!) {

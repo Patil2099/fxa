@@ -21,3 +21,4 @@ avatar-page-camera-error = Could not initialize camera
 avatar-page-new-avatar =
   .alt = new profile picture
 avatar-page-file-upload-error = There was an issue uploading your profile picture
+avatar-page-delete-error = There was an issue deleting your avatar
