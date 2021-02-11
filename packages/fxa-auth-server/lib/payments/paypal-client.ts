@@ -107,6 +107,10 @@ export type NVPDoReferenceTransactionResponse = NVPResponse &
 
 export type NVPBAUpdateTransactionResponse = NVPResponse & BAUpdateData;
 
+export type SetExpressCheckoutOptions = {
+  currencyCode: string;
+};
+
 export type CreateBillingAgreementOptions = {
   token: string;
 };
@@ -261,14 +265,16 @@ export class PayPalClient {
    * The API is extensive. Currently this method only supports the situation where you're getting an authorizing
    * token that allows us to perform billing in the future.
    */
-  public async setExpressCheckout(): Promise<NVPSetExpressCheckoutResponse> {
+  public async setExpressCheckout(
+    options: SetExpressCheckoutOptions
+  ): Promise<NVPSetExpressCheckoutResponse> {
     const data = {
       CANCELURL: PLACEHOLDER_URL,
       L_BILLINGAGREEMENTDESCRIPTION0: 'Mozilla',
       L_BILLINGTYPE0: 'MerchantInitiatedBilling',
       NOSHIPPING: 1,
       PAYMENTREQUEST_0_AMT: '0',
-      PAYMENTREQUEST_0_CURRENCYCODE: 'USD',
+      PAYMENTREQUEST_0_CURRENCYCODE: options.currencyCode,
       PAYMENTREQUEST_0_PAYMENTACTION: 'AUTHORIZATION',
       RETURNURL: PLACEHOLDER_URL,
     };
