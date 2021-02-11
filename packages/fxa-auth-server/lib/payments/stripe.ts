@@ -4,6 +4,8 @@
 import * as Sentry from '@sentry/node';
 import cacheManager, { Cacheable, CacheClear } from '@type-cacheable/core';
 import { useAdapter } from '@type-cacheable/ioredis-adapter';
+import { CountryCodeString } from 'aws-sdk/clients/acmpca';
+import { bool } from 'aws-sdk/clients/signer';
 import {
   createAccountCustomer,
   deleteAccountCustomer,
@@ -813,6 +815,26 @@ export class StripeHelper {
   })
   async allPlans(): Promise<AbbrevPlan[]> {
     return this.fetchAllPlans();
+  }
+
+  /**
+   * Verify that a given source country matches the plan currency.
+   */
+
+  isCurrencyCompatibleWithCountry(plan: AbbrevPlan, country: string): bool {
+    // TODO - Do these lists need to be mutually exclusive?
+    const currencyCountryMap = new Map([
+      [
+        'USD',
+        ['US', 'GB', 'NZ', 'MY', 'SG', 'CA', 'AS', 'GU', 'MP', 'PR', 'VI'],
+      ],
+      ['EUR', ['FR', 'DE']],
+    ]);
+    const countryList = currencyCountryMap.get(plan.currency);
+    if (countryList && countryList.includes(country)) {
+      return true;
+    }
+    return false;
   }
 
   /**

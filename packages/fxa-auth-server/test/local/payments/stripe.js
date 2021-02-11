@@ -1823,6 +1823,35 @@ describe('StripeHelper', () => {
     });
   });
 
+  describe('isCurrencyCompatibleWithCountry', () => {
+    it('returns true if valid', () => {
+      assert(
+        stripeHelper.isCurrencyCompatibleWithCountry(
+          { currency: 'EUR' },
+          'FR'
+        ) === true
+      );
+    });
+
+    it('returns false if country not in values', () => {
+      assert(
+        stripeHelper.isCurrencyCompatibleWithCountry(
+          { currency: 'EUR' },
+          'Not a country'
+        ) === false
+      );
+    });
+
+    it('returns false if currency not in keys', () => {
+      assert(
+        stripeHelper.isCurrencyCompatibleWithCountry(
+          { currency: 'Not a currency' },
+          'FR'
+        ) === false
+      );
+    });
+  });
+
   describe('findPlanById', () => {
     it('finds a valid plan', async () => {
       const planId = 'plan_G93lTs8hfK7NNG';
