@@ -20,16 +20,43 @@
   @include min-width('desktop') {
     padding: 28px 48px 48px;
   }
+  .pay-with-heading {
+    color: rgb(115, 115, 115);
+    display: grid;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
+    grid-gap: 20px;
+    &:before,
+    &:after {
+      content: '';
+      border-top: 1px solid #e0e0e6;
+    }
+  }
+
+
+  .subscription-create-pay-with-other .paypal-button {
+    width: 120px;
+    height: 35px;
+    margin: auto; 
+    position: relative;
+      div {
+        // This is very hacky, but without it the button is off-center
+        position: absolute;
+        right: -8px;
+      }
+  }
+
+
+  .subscription-create-pay-with-card .accepted-cards {
+    justify-content: center;
+  }
 
   .billing-title {
     font-size: 15px;
     font-weight: 600;
     margin-bottom: 20px;
-
-    @include min-width('tablet') {
-      border-top: 1px solid #e0e0e6;
-      padding-top: 16px;
-    }
   }
 
   .subscription-create-heading {
